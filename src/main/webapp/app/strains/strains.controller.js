@@ -5,19 +5,22 @@
         .module('puffpdxApp')
         .controller('StrainsController', StrainsController);
 
-    StrainsController.$inject = ['$scope', 'Principal', 'LoginService', '$state'];
+    StrainsController.$inject = ['$scope', 'StrainsService', '$state'];
 
-    function StrainsController ($scope, LoginService, $state) {
+    function StrainsController ($scope, StrainsService, $state) {
         var vm = this;
 
-        vm.account = null;
-        vm.isAuthenticated = null;
-        vm.login = LoginService.open;
-        vm.register = register;
+        StrainsService.getStrains({},
+            onSuccess, onError);
 
-        function getStrains () {
-            //TODO Update this
-            alert("test");
+        function onSuccess(data, headers) {
+            vm.strains = data.data;
+            //alert("response1 " + JSON.stringify(vm.strains));
+        }
+
+        function onError(error) {
+            //TODO implement
         }
     }
+
 })();
