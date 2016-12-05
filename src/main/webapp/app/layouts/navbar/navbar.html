@@ -82,6 +82,13 @@
                                 <span>Register</span>
                             </a>
                         </li>
+
+                        <li ui-sref-active="active" ng-switch-when="false">
+                            <a ui-sref="strains" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;
+                                <span>Strains</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li ng-class="{active: vm.$state.includes('admin')}"  ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown class="dropdown pointer">
