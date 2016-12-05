@@ -1,0 +1,12 @@
+version: '2'
+services:
+    puffpdx-postgresql:
+        container_name: puffpdx-postgresql
+        image: postgres:9.5.4
+        # volumes:
+        #     - ~/volumes/jhipster/puffpdx/postgresql/:/var/lib/postgresql/
+        environment:
+            - POSTGRES_USER=puffpdx
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432
