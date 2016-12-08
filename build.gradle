@@ -1,6 +1,7 @@
 import org.gradle.internal.os.OperatingSystem
 
 buildscript {
+    ext.kotlin_version = '1.0.5-2'
     repositories {
         mavenLocal()
         mavenCentral()
@@ -17,11 +18,13 @@ buildscript {
         classpath "com.moowork.gradle:gradle-node-plugin:0.13"
         classpath "com.moowork.gradle:gradle-gulp-plugin:0.13"
         classpath "io.spring.gradle:dependency-management-plugin:0.6.1.RELEASE"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         //jhipster-needle-gradle-buildscript-dependency - JHipster will add additional gradle build script plugins here
     }
 }
 
 apply plugin: 'java'
+apply plugin: 'kotlin'
 sourceCompatibility=1.8
 targetCompatibility=1.8
 apply plugin: 'maven'
@@ -226,6 +229,7 @@ dependencies {
     testCompile "com.github.tomakehurst:wiremock:2.1.12"
 
     optional "org.springframework.boot:spring-boot-configuration-processor:${spring_boot_version}"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
 }
 
@@ -247,3 +251,7 @@ task stage(dependsOn: 'bootRepackage') {
 compileJava.dependsOn processResources
 processResources.dependsOn cleanResources,bootBuildInfo
 bootBuildInfo.mustRunAfter cleanResources
+sourceSets {
+    main.kotlin.srcDirs += 'src/main/java'
+    main.java.srcDirs += 'src/main/java'
+}

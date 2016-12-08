@@ -16,7 +16,7 @@ import static org.springframework.http.MediaType.TEXT_PLAIN_VALUE;
 public class WiremockTests {
     RestTemplate restTemplate;
     ResponseEntity response;
-    
+
     @Rule
     public WireMockRule wireMockRule = new WireMockRule(wireMockConfig().port(8089));
 

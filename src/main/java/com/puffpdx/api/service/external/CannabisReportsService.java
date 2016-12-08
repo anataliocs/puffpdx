@@ -8,4 +8,6 @@ import com.puffpdx.api.model.strains.Strains;
 public interface CannabisReportsService {
 
     Strains getStrains(String sort, String page);
+
+    Strains getEffectsByUcpc(String ucpc);
 }
