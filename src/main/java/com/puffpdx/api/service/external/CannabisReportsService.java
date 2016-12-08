@@ -1,5 +1,6 @@
 package com.puffpdx.api.service.external;
 
+import com.puffpdx.api.model.strains.Effects;
 import com.puffpdx.api.model.strains.Strains;
 
 /**
@@ -9,5 +10,5 @@ public interface CannabisReportsService {
 
     Strains getStrains(String sort, String page);
 
-    Strains getEffectsByUcpc(String ucpc);
+    Effects getEffectsByUcpc(String ucpc);
 }

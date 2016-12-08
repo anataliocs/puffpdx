@@ -2,6 +2,7 @@ package com.puffpdx.api.service.external;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.puffpdx.api.config.WiremockResponses;
+import com.puffpdx.api.model.strains.Effects;
 import com.puffpdx.api.model.strains.Strains;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,16 +35,16 @@ public class CannabisReportsServiceImpl implements CannabisReportsService {
     }
 
     @Override
-    public Strains getEffectsByUcpc(String ucpc) {
-        Strains strains = null;
+    public Effects getEffectsByUcpc(String ucpc) {
+        Effects effects = null;
 
         try {
-            strains = objectMapper.readValue(WiremockResponses.effectsResponseBody, Strains.class);
+            effects = objectMapper.readValue(WiremockResponses.effectsResponseBody, Effects.class);
         } catch (IOException e) {
             //TODO Handle Parse exception
             e.printStackTrace();
         }
 
-        return strains;
+        return effects;
     }
 }
