@@ -1,6 +1,7 @@
 package com.puffpdx.api.web.rest;
 
 import com.puffpdx.api.model.strains.Effects;
+import com.puffpdx.api.model.strains.Flowers;
 import com.puffpdx.api.model.strains.Strains;
 import com.puffpdx.api.service.external.CannabisReportsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,11 @@ public class CannabisReportsResource {
     @GetMapping("/strains/{ucpc}/effectsFlavors")
     public ResponseEntity<Effects> getEffectsByUcPc(@PathVariable(value = "ucpc") String ucpc) {
         return new ResponseEntity<Effects>(cannabisReportsService.getEffectsByUcpc(ucpc), HttpStatus.OK);
+    }
+
+    @GetMapping("/flowers")
+    public ResponseEntity<Flowers> getFlowers(@RequestParam(value = "sort") String sort,
+                                           @RequestParam(value = "page") String page) {
+        return new ResponseEntity<Flowers>(cannabisReportsService.getFlowers("",""), HttpStatus.OK);
     }
 }

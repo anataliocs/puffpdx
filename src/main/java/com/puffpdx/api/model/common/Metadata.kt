@@ -1,7 +1,7 @@
-package com.puffpdx.api.model.strains
+package com.puffpdx.api.model.common
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import com.puffpdx.api.model.common.Metadata
+import com.puffpdx.api.model.strains.StrainData
 
 /**
  * https://www.cannabisreports.com/api/v1.0/strains?sort=name&page=3
@@ -25,7 +25,7 @@ import com.puffpdx.api.model.common.Metadata
  * }
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-class Strains {
-    var data: List<StrainData>? = null
-    var meta: Metadata? = null
+class Metadata {
+    var pagination: Pagination? = null
 }
+

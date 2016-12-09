@@ -1,6 +1,7 @@
-package com.puffpdx.api.model.strains
+package com.puffpdx.api.model.common
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.puffpdx.api.model.strains.StrainData
 
 /**
  * https://www.cannabisreports.com/api/v1.0/strains?sort=name&page=3
@@ -24,8 +25,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
  * }
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-class StrainMeta {
-    var data: List<StrainData>? = null
-    var strainMeta: StrainMeta? = null
+class Pagination {
+    var total: String? = null
+    var count: String? = null
+    var per_page: String? = null
+    var current_page: String? = null
+    var total_pages: String? = null
 }
 

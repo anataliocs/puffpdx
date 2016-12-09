@@ -3,15 +3,13 @@ package com.puffpdx.api.service.external;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.puffpdx.api.config.WiremockResponses;
 import com.puffpdx.api.model.strains.Effects;
+import com.puffpdx.api.model.strains.Flowers;
 import com.puffpdx.api.model.strains.Strains;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class CannabisReportsServiceImpl implements CannabisReportsService {
@@ -52,5 +50,20 @@ public class CannabisReportsServiceImpl implements CannabisReportsService {
         }
 
         return effects;
+    }
+
+    @Override
+    public Flowers getFlowers(String sort, String page) {
+
+        Flowers flowers = null;
+
+        try {
+            flowers = objectMapper.readValue(WiremockResponses.flowersResponseBody, Flowers.class);
+        } catch (IOException e) {
+            //TODO Handle Parse exception
+            e.printStackTrace();
+        }
+
+        return flowers;
     }
 }
