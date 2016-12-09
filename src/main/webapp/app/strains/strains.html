@@ -4,13 +4,40 @@
             <h1>Let's find out what you like</h1>
             <p class="lead">Strains</p>
 
-            <div class="row">
+            <div class="[ form-group ]">
+                <input type="checkbox" name="fancy-checkbox-default" id="fancy-checkbox-default" autocomplete="off" />
+                <div class="[ btn-group ]">
+                    <label for="fancy-checkbox-default" class="[ btn btn-default ]">
+                        <span class="[ glyphicon glyphicon-ok ]"></span>
+                        <span> </span>
+                    </label>
+                    <label for="fancy-checkbox-default" class="[ btn btn-default active ]">
+                        Enhancement
+                    </label>
+                </div>
+            </div>
+            <div class="[ form-group ]">
+                <input type="checkbox" name="fancy-checkbox-success" id="fancy-checkbox-success" autocomplete="off" />
+                <div class="[ btn-group ]">
+                    <label for="fancy-checkbox-success" class="[ btn btn-success ]">
+                        <span class="[ glyphicon glyphicon-ok ]"></span>
+                        <span> </span>
+                    </label>
+                    <label for="fancy-checkbox-success" class="[ btn btn-default active ]">
+                        Anxiety
+                    </label>
+                </div>
+            </div>
 
-                <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">&nbsp;</div>
+                <div class="col-md-4">
                     <button type="submit" ng-click="vm.getAllStrains()"
-                            class="btn btn-primary btn-lg"><i class="fa fa-search"></i> Search!
+                            class="btn btn-primary btn-lg">
+                        <i class="fa fa-search fa-2x"></i> Search!
                     </button>
                 </div>
+                <div class="col-md-4">&nbsp;</div>
             </div>
 
             <br/>
@@ -25,7 +52,7 @@
                           <i class="fa fa-circle-o-notch fa-stack-2x text-success"></i>
                         </span>
 
-                        <h3 class="text-success">Retrieving Happiness...</h3>
+                        <h3>Retrieving Happiness...</h3>
                     </div>
                 </div>
             </div>
