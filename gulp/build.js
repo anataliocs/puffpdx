@@ -18,6 +18,8 @@ var fs = require('fs'),
     handleErrors = require('./handle-errors');
 
 var config = require('./config');
+var filter = require('gulp-filter');
+const faFilter = filter(['*','!font-awesome.css'], {restore: true});
 
 var initTask = lazypipe()
     .pipe(sourcemaps.init);
@@ -42,7 +44,9 @@ module.exports = function() {
         //append html templates
         .pipe(gulpIf('**/app.js', footer(templates)))
         .pipe(gulpIf('*.js', jsTask()))
+        .pipe(faFilter)
         .pipe(gulpIf('*.css', cssTask()))
+        .pipe(faFilter.restore)
         .pipe(gulpIf('*.html', htmlmin({collapseWhitespace: true})))
         .pipe(gulpIf('**/*.!(html)', rev()))
         .pipe(revReplace({manifest: manifest}))

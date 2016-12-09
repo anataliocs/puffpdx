@@ -55,6 +55,20 @@ gulp.task('images', function () {
         .pipe(browserSync.reload({stream: true}));
 });
 
+gulp.task('copy:fontawesomefonts', copy.fonts);
+
+gulp.task('fontawesomefonts', function () {
+    return gulp.src(config.bower + 'components-font-awesome/fonts/*.*')
+        .pipe(plumber({errorHandler: handleErrors}))
+        .pipe(changed(config.dist + 'content/fonts/'))
+        .pipe(rev())
+        .pipe(gulp.dest(config.dist + 'content/fonts/'))
+        .pipe(rev.manifest(config.revManifest, {
+            base: config.dist,
+            merge: true
+        }))
+        .pipe(gulp.dest(config.dist + 'content/fonts/'));
+});
 
 gulp.task('styles', [], function () {
     return gulp.src(config.app + 'content/css')

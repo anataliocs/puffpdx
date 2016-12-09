@@ -9,18 +9,24 @@
 
     function StrainsController ($scope, StrainsService, $state) {
         var vm = this;
+        vm.showLoading = false;
 
-        StrainsService.getStrains({},
-            onSuccess, onError);
+        vm.getAllStrains = function() {
+            vm.showLoading = true;
 
-        function onSuccess(data, headers) {
-            vm.strains = data.data;
-            //alert("response1 " + JSON.stringify(vm.strains));
-        }
+            StrainsService.getStrains({},
+                onSuccess, onError);
 
-        function onError(error) {
-            //TODO implement
-        }
+            function onSuccess(data, headers) {
+                vm.strains = data.data;
+                vm.showLoading = false;
+            }
+
+            function onError(error) {
+                //TODO implement
+            }
+        };
+
     }
 
 })();
