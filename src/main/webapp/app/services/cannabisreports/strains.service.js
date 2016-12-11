@@ -9,9 +9,13 @@
 
     function StrainsService($resource) {
 
-        var service = $resource('/cannabisreports/strains?sort=test&page=1', {}, {
+        var service = $resource('/cannabisreports/strains?sort=:sort&page=:page', {}, {
             'getStrains': {
                 method: 'GET',
+                params:{
+                    sort:'test',
+                    page: 'page'
+                },
                 transformResponse: function (data) {
                     data = angular.fromJson(data);
                     return data;

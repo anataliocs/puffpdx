@@ -1,0 +1,22 @@
+version: 1
+
+services:
+  threadPoolTaskExecutorConfig:
+    allowCoreThreadTimeOut: false
+    corePoolSize: 1
+    keepAliveSeconds: 60
+    maxPoolSize: 2147483647
+    queueCapacity: 2147483647
+
+  eventRegistrationServiceUri:
+    scheme: http
+    host: localhost
+    port: 8089
+    basePath: api/{version}/strains
+    templateValues: v1.0
+  eventPublicationServiceUri:
+    scheme: http
+    host: localhost
+    port: 8089
+    basePath: /api/{version}/flowers/
+    templateValues: v1.0

@@ -1,0 +1,22 @@
+version: 1
+
+services:
+  threadPoolTaskExecutorConfig:
+    allowCoreThreadTimeOut: false
+    corePoolSize: 1
+    keepAliveSeconds: 60
+    maxPoolSize: 2147483647
+    queueCapacity: 2147483647
+
+  eventRegistrationServiceUri:
+    scheme: http
+    host: localhost
+    port: 8089
+    basePath: /{domain}/resource/v1
+    templateValues: pricing
+  eventPublicationServiceUri:
+    scheme: http
+    host: localhost
+    port: 8089
+    basePath: /{domain}/{publish-event}/v1/{id}
+    templateValues: pricing,publish-prices,c17e74db-2304-4191-bd9f-898c51082a50

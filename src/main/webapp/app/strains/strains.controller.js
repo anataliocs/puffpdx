@@ -14,7 +14,8 @@
         vm.getAllStrains = function() {
             vm.showLoading = true;
 
-            StrainsService.getStrains({},
+            //TODO use form params
+            StrainsService.getStrains({sort:'test', page: 3},
                 onSuccess, onError);
 
             function onSuccess(data, headers) {
