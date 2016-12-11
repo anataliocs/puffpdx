@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.client.AsyncRestTemplate;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -53,6 +54,9 @@ public class ExternalServicesConfig {
             .expand(generateTemplateVariableList(eventPublicationServiceUri)) //TODO: determine how to persist and retreive publishURI
             .encode();
     }
+
+    @Bean
+    public RestTemplate restTemplate() {return new RestTemplate();}
 
     @Bean
     public AsyncRestTemplate asyncRestTemplate() {

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.http.UniformDistribution;
+import com.puffpdx.api.model.strains.Strains;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.TEXT_PLAIN_VALUE;
 
 /**
@@ -32,13 +34,11 @@ public class MockExternalSvcConfig {
     @Bean
     public WireMockServer wireMockServer() {
 
-        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        String registerEventResponseBody = "";
-        String publishEventResponseBody = "";
+        ObjectMapper om = new ObjectMapper();
+        Strains strains = null;
 
         try {
-            registerEventResponseBody = ow.writeValueAsString("");
-            publishEventResponseBody = ow.writeValueAsString("");
+            strains = om.readValue(WiremockResponses.strainsResponseBody, Strains.class);
         } catch (IOException e) {
             //Do Nothing
         }
@@ -51,8 +51,8 @@ public class MockExternalSvcConfig {
         wireMockServer.stubFor(get(urlEqualTo("/api/v1.0/strains"))
             .willReturn(aResponse()
                 .withStatus(HttpStatus.OK.value())
-                .withHeader("Content-Type", TEXT_PLAIN_VALUE)
-                .withBody("test1234")
+                .withHeader("Content-Type", APPLICATION_JSON_VALUE)
+                .withBody(WiremockResponses.strainsResponseBody)
                 .withRandomDelay(simulatedLatency)));
 
         wireMockServer.stubFor(get(urlEqualTo("/api/v1.0/flowers"))
@@ -65,5 +65,7 @@ public class MockExternalSvcConfig {
 
         return wireMockServer;
     }
+
+
 }
 

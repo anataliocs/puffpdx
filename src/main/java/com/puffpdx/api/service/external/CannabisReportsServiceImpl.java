@@ -24,6 +24,9 @@ public class CannabisReportsServiceImpl implements CannabisReportsService {
     AsyncRestTemplate asyncRestTemplate;
 
     @Autowired
+    RestTemplate restTemplate;
+
+    @Autowired
     ObjectMapper objectMapper;
 
     @Autowired
@@ -31,41 +34,14 @@ public class CannabisReportsServiceImpl implements CannabisReportsService {
 
 
     @Override
-    public Strains getStrains(String sort, String page) {
+    public ResponseEntity<Strains> getStrains(String sort, String page) {
         Strains strains = null;
 
-        //TODO Implement wiremocking
-        //strains = restTemplate.getForObject("https://www.cannabisreports.com/api/v1.0/strains?sort=name&page=3", Strains.class);
+        ResponseEntity<Strains> response =
+            restTemplate.getForEntity(
+                eventRegistrationServiceUri.toUriString(),Strains.class);
 
-        System.out.println();
-        System.out.println("=====");
-        System.out.println("Making rest call to cr");
-
-        ListenableFuture<ResponseEntity<String>> response =
-            asyncRestTemplate.getForEntity(
-                eventRegistrationServiceUri.toUriString(),String.class, new HashMap<String, Object>());
-
-        response.addCallback(onSuccess -> {
-                System.out.println();
-                System.out.println("-----");
-                System.out.println("onSuccess = " + onSuccess.getBody());
-                System.out.println();
-        },
-            failure -> {
-                System.out.println();
-                System.out.println("-----");
-                failure.printStackTrace();
-                System.out.println();
-            });
-
-        try {
-            strains = objectMapper.readValue(WiremockResponses.strainsResponseBody, Strains.class);
-        } catch (IOException e) {
-            //TODO Handle Parse exception
-            e.printStackTrace();
-        }
-
-        return strains;
+        return response;
     }
 
     @Override
